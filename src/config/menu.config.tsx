@@ -27,13 +27,11 @@ export const MENU_SIDEBAR: TMenuConfig = [
             title: 'Default',
             path: '/',
              icon: 'home',
-       
           },
           {
             title: 'Creator',
             path: '/public-profile/profiles/creator',
             icon: 'flag'
-             
           },
           {
             title: 'Company',

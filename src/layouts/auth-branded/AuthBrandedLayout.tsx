@@ -30,8 +30,8 @@ const Layout = () => {
           <div className="flex flex-col p-8 lg:p-16 gap-4">
             <Link to="/">
               <img
-                src={toAbsoluteUrl('/media/app/mini-logo.svg')}
-                className="h-[28px] max-w-none"
+                src={toAbsoluteUrl('/media/app/Logo Oris.svg')}
+                className="h-[60px] max-w-none"
                 alt=""
               />
             </Link>
@@ -43,7 +43,7 @@ const Layout = () => {
                 <br /> secure&nbsp;
                 <span className="text-gray-900 font-semibold">efficient user access</span>
                 &nbsp;to the Metronic
-                <br /> Dashboard interface.
+                <br /> Dashboard interface.0
               </div>
             </div>
           </div>
