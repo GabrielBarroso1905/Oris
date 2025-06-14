@@ -27,7 +27,7 @@ const Contributions = ({ title }: IContributionsProps) => {
     { title: "IMC", icon: 'ki-filled ki-user-tick', iconColor: 'text-info' }
   ];
 
-  const data: number[] = [10, 50, 60, 50];
+  const data: number[] = [10, 50, 60, 20];
 
   const healthyRanges = {
     sleep: { min: 8, max: 12 },

@@ -25,10 +25,9 @@ export const MENU_SIDEBAR: TMenuConfig = [
         children: [
           {
             title: 'Default',
-            path: '/public-profile/profiles/default',
+            path: '/',
              icon: 'home',
        
-            
           },
           {
             title: 'Creator',
