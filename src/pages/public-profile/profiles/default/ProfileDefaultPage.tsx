@@ -1,13 +1,10 @@
 import { Fragment } from 'react';
-
 import { toAbsoluteUrl } from '@/utils/Assets';
 import { KeenIcon } from '@/components';
 import { Container } from '@/components/container';
-
 import { UserProfileHero } from '@/partials/heros';
 import { Navbar, NavbarActions, NavbarDropdown } from '@/partials/navbar';
 import { PageMenu } from '@/pages/public-profile';
-
 import { ProfileDefaultContent } from '.';
 
 const ProfileDefaultPage = () => {
@@ -20,33 +17,13 @@ const ProfileDefaultPage = () => {
 
   return (
     <Fragment>
-      <UserProfileHero
-        name="Jenny Klabber"
-        image={image}
-        info={[
-          { label: 'KeenThemes', icon: 'abstract-41' },
-          { label: 'SF, Bay Area', icon: 'geolocation' },
-          { email: 'jenny@kteam.com', icon: 'sms' }
-        ]}
-      />
-
-      <Container>
-        <Navbar>
+      <Container className="flex justify-center"> {/* Adicionei flex justify-center aqui */}
+        <Navbar >
           <PageMenu />
-
-          <NavbarActions>
-            <button type="button" className="btn btn-sm btn-primary">
-              <KeenIcon icon="users" /> Connect
-            </button>
-            <button className="btn btn-sm btn-icon btn-light">
-              <KeenIcon icon="messages" />
-            </button>
-            <NavbarDropdown />
-          </NavbarActions>
         </Navbar>
       </Container>
 
-      <Container>
+      <Container >
         <ProfileDefaultContent />
       </Container>
     </Fragment>

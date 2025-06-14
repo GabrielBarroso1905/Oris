@@ -1,48 +1,34 @@
 import {
-  About,
   CommunityBadges,
-  Connections,
-  Contributions,
-  MediaUploads,
-  Projects,
-  RecentUploads,
-  Tags,
-  UnlockPartnerships,
-  WorkExperience
+  Contributions
 } from './blocks';
+import { ExternalServicesManageApi } from '@/pages/account/home/settings-sidebar';
 
 const ProfileDefaultContent = () => {
+  const userName = 'Pedro';
+  const userId = '20222SI0026';
+
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 lg:gap-7.5">
-      <div className="col-span-1">
-        <div className="grid gap-5 lg:gap-7.5">
-          <CommunityBadges title="Community Badges" />
-
-          <About />
-
-          <WorkExperience />
-
-          <Tags title="Skills" />
-
-          <RecentUploads title="Recent Uploads" />
+    <div className="xl:grid-cols-3 gap-5 lg:gap-7.5">
+      {/* Saudação do usuário */}
+    <div className="flex justify-center">
+        <div className="w-full max-w-3xl px-6"> {/* Added container with padding */}
+          <div className="flex items-center gap-4">
+            {/* Greeting */}
+            <div className="flex flex-col py-4"> {/* Added vertical padding */}
+              <span className="text-xl font-bold text-blue-600">Olá, {userName}</span>
+              <span className="text-sm text-gray-500">{userId}</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="col-span-2">
-        <div className="flex flex-col gap-5 lg:gap-7.5">
-          <div className="flex flex-col gap-5 lg:gap-7.5">
-            <UnlockPartnerships />
-
-            <MediaUploads />
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-7.5">
-            <Connections title="Contributors" />
-
-            <Contributions title="Assistance" />
-          </div>
-
-          <Projects />
+      {/* Conteúdo do perfil */}
+      <div className="flex justify-center">
+        <div className="grid gap-5">
+          <ExternalServicesManageApi title="Public API Key" switch={true} />
+          <CommunityBadges title="Community Badges" />
+          <Contributions title="Investments" />
         </div>
       </div>
     </div>

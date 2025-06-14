@@ -1,137 +1,111 @@
 import { type TMenuConfig } from '@/components/menu';
 
 export const MENU_SIDEBAR: TMenuConfig = [
-  {
-    title: 'Dashboards',
-    icon: 'element-11',
-    children: [
-      {
-        title: 'Light Sidebar',
-        path: '/'
-      },
-      {
-        title: 'Dark Sidebar',
-        path: '/dark-sidebar'
-      }
-    ]
-  },
-  {
-    heading: 'User'
-  },
-  {
-    title: 'Public Profile',
-    icon: 'profile-circle',
-    children: [
-      {
+  // {
+  //   title: 'Dashboards',
+  //   icon: 'element-11',
+  //   children: [
+  //     {
+  //       title: 'Light Sidebar',
+  //       path: '/'
+  //     },
+  //     {
+  //       title: 'Dark Sidebar',
+  //       path: '/dark-sidebar'
+  //     }
+  //   ]
+  // },
+  // {
+  //   heading: 'User'
+  // },
+
+     {
         title: 'Profiles',
+        icon: 'profile-circle',
         children: [
           {
             title: 'Default',
-            path: '/public-profile/profiles/default'
+            path: '/public-profile/profiles/default',
+             icon: 'home',
+       
+            
           },
           {
             title: 'Creator',
-            path: '/public-profile/profiles/creator'
+            path: '/public-profile/profiles/creator',
+            icon: 'flag'
+             
           },
           {
             title: 'Company',
-            path: '/public-profile/profiles/company'
+            path: '/public-profile/profiles/company',
+            icon: 'documents'
+             
           },
           {
             title: 'NFT',
-            path: '/public-profile/profiles/nft'
+            path: '/public-profile/profiles/nft',
+            icon: 'profile'
+            
           },
-          {
-            title: 'Blogger',
-            path: '/public-profile/profiles/blogger'
-          },
-          {
-            title: 'CRM',
-            path: '/public-profile/profiles/crm'
-          },
-          {
-            title: 'More',
-            collapse: true,
-            collapseTitle: 'Show less',
-            expandTitle: 'Show 4 more',
-            dropdownProps: {
-              placement: 'right-start'
-            },
-            children: [
-              {
-                title: 'Gamer',
-                path: '/public-profile/profiles/gamer'
-              },
-              {
-                title: 'Feeds',
-                path: '/public-profile/profiles/feeds'
-              },
-              {
-                title: 'Plain',
-                path: '/public-profile/profiles/plain'
-              },
-              {
-                title: 'Modal',
-                path: '/public-profile/profiles/modal'
-              }
-            ]
-          }
         ]
       },
-      {
-        title: 'Projects',
-        children: [
-          {
-            title: '3 Columns',
-            path: '/public-profile/projects/3-columns'
-          },
-          {
-            title: '2 Columns',
-            path: '/public-profile/projects/2-columns'
-          }
-        ]
-      },
-      {
-        title: 'Works',
-        path: '/public-profile/works'
-      },
-      {
-        title: 'Teams',
-        path: '/public-profile/teams'
-      },
-      {
-        title: 'Network',
-        path: '/public-profile/network'
-      },
-      {
-        title: 'Activity',
-        path: '/public-profile/activity'
-      },
-      {
-        title: 'More',
-        collapse: true,
-        collapseTitle: 'Show less',
-        expandTitle: 'Show 3 more',
-        dropdownProps: {
-          placement: 'right-start'
-        },
-        children: [
-          {
-            title: 'Campaigns - Card',
-            path: '/public-profile/campaigns/card'
-          },
-          {
-            title: 'Campaigns - List',
-            path: '/public-profile/campaigns/list'
-          },
-          {
-            title: 'Empty',
-            path: '/public-profile/empty'
-          }
-        ]
-      }
-    ]
-  },
+  //   children: [
+     
+  //     {
+  //       title: 'Projects',
+  //       children: [
+  //         {
+  //           title: '3 Columns',
+  //           path: '/public-profile/projects/3-columns'
+  //         },
+  //         {
+  //           title: '2 Columns',
+  //           path: '/public-profile/projects/2-columns'
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       title: 'Works',
+  //       path: '/public-profile/works'
+  //     },
+  //     {
+  //       title: 'Teams',
+  //       path: '/public-profile/teams'
+  //     },
+  //     {
+  //       title: 'Network',
+  //       path: '/public-profile/network'
+  //     },
+  //     {
+  //       title: 'Activity',
+  //       path: '/public-profile/activity'
+  //     },
+  //     {
+  //       title: 'More',
+  //       collapse: true,
+  //       collapseTitle: 'Show less',
+  //       expandTitle: 'Show 3 more',
+  //       dropdownProps: {
+  //         placement: 'right-start'
+  //       },
+  //       children: [
+  //         {
+  //           title: 'Campaigns - Card',
+  //           path: '/public-profile/campaigns/card'
+  //         },
+  //         {
+  //           title: 'Campaigns - List',
+  //           path: '/public-profile/campaigns/list'
+  //         },
+  //         {
+  //           title: 'Empty',
+  //           path: '/public-profile/empty'
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },
   {
     title: 'My Account',
     icon: 'setting-2',
@@ -533,7 +507,7 @@ export const MENU_MEGA: TMenuConfig = [
           {
             children: [
               {
-                title: 'Default',
+                // title: 'Default',
                 icon: 'badge',
                 path: '/public-profile/profiles/default'
               },

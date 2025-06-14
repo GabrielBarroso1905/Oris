@@ -20,29 +20,9 @@ const ProfileNFTPage = () => {
 
   return (
     <Fragment>
-      <UserProfileHero
-        name="Jenny Klabber"
-        image={image}
-        info={[
-          { label: 'KeenThemes', icon: 'abstract' },
-          { label: 'SF, Bay Area', icon: 'geolocation' },
-          { email: 'jenny@kteam.com', icon: 'sms' }
-        ]}
-      />
-
-      <Container>
+ <Container className="flex justify-center">
         <Navbar>
           <PageMenu />
-
-          <NavbarActions>
-            <button type="button" className="btn btn-sm btn-primary">
-              <KeenIcon icon="users" /> Connect
-            </button>
-            <button className="btn btn-sm btn-icon btn-light">
-              <KeenIcon icon="messages" />
-            </button>
-            <NavbarDropdown />
-          </NavbarActions>
         </Navbar>
       </Container>
 

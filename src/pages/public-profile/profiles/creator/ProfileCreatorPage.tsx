@@ -7,8 +7,9 @@ import { Container } from '@/components/container';
 import { UserProfileHero } from '@/partials/heros';
 import { Navbar, NavbarActions, NavbarDropdown } from '@/partials/navbar';
 import { PageMenu } from '@/pages/public-profile';
+import { ProfileCreatorContent } from './ProfileCreatorContent';
 
-import { ProfileCreatorContent } from '.';
+
 
 const ProfileCreatorPage = () => {
   const image = (
@@ -19,32 +20,11 @@ const ProfileCreatorPage = () => {
 
   return (
     <Fragment>
-      <UserProfileHero
-        name="Inferno"
-        image={image}
-        info={[
-          { label: 'inferno.com', icon: 'abstract-39' },
-          { label: 'SF, Bay Area', icon: 'geolocation' },
-          { email: 'jenny@kteam.com', icon: 'sms' }
-        ]}
-      />
 
-      <Container>
+
+   <Container className="flex justify-center">
         <Navbar>
           <PageMenu />
-
-          <NavbarActions>
-            <a href="#" className="btn btn-sm btn-primary">
-              <KeenIcon icon="mouse-square" /> Hire Us
-            </a>
-            <button type="button" className="btn btn-sm btn-light">
-              <KeenIcon icon="users" /> Follow
-            </button>
-            <button className="btn btn-sm btn-icon btn-light">
-              <KeenIcon icon="messages" />
-            </button>
-            <NavbarDropdown />
-          </NavbarActions>
         </Navbar>
       </Container>
 

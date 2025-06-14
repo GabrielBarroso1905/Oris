@@ -1,9 +1,6 @@
-import { Fragment, useState } from 'react';
-
+import { Fragment } from 'react';
 import { KeenIcon } from '@/components';
 import { toAbsoluteUrl } from '@/utils/Assets';
-
-import { CommonHexagonBadge } from '@/partials/common';
 
 interface IExternalServicesManageApiProps {
   title: string;
@@ -12,99 +9,72 @@ interface IExternalServicesManageApiProps {
 
 const ExternalServicesManageApi = ({
   title,
-  switch: showSwitch
+  switch: showSwitch,
 }: IExternalServicesManageApiProps) => {
-
-const [apikeyInput, setApiKeyInput] = useState('abc123xyz456sample789key000');
-
   return (
     <Fragment>
       <style>
         {`
-          .user-access-bg {
-            background-image: url('${toAbsoluteUrl('/media/images/2600x1200/bg-5.png')}');
+          .hexagon-container {
+            position: relative;
+            width: 56px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
-          .dark .user-access-bg {
-            background-image: url('${toAbsoluteUrl('/media/images/2600x1200/bg-5-dark.png')}');
+          .hexagon {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(from 45deg, #3b82f6, #10b981);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+          }
+          .hexagon-inner {
+            position: relative;
+            width: 50px;
+            height: 58px;
+            background: white;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .dark .hexagon-inner {
+            background: #1f2937;
           }
         `}
       </style>
 
-      <div className="card">
-        <div className="card-header mb-5" id="external_services_manage_api">
-          <h3 className="card-title">{title || 'Manage API'}</h3>
-          {showSwitch && (
-            <div className="flex items-center gap-2">
-              <label className="switch switch-sm">
-                <span className="switch-label">Pause</span>
-                <input type="checkbox" value="1" name="check" readOnly />
-              </label>
-            </div>
-          )}
-        </div>
-
-        <div className="card-body lg:py-7.5 grid gap-5 lg:gap-7.5">
-          <div className="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
-            <label className="form-label max-w-56 text-gray-800 font-normal">API Key</label>
-
-            <label className="input">
-              <input
-                placeholder="Right icon"
-                type="text"
-                value={apikeyInput}
-                onChange={(e) => setApiKeyInput(e.target.value)}
-              /> 
-              <button className="btn btn-icon">
-                <KeenIcon icon="copy" />
-              </button>
-            </label>
-          </div>
-
-          <div className="flex items-center flex-wrap sm:flex-nowrap justify-between grow border border-gray-200 rounded-xl gap-2 p-5 
-          rtl:[background-position:-195px_-85px] [background-position:195px_-85px] bg-no-repeat bg-[length:650px] user-access-bg">
-            <div className="flex items-center gap-4">
-              <CommonHexagonBadge
-                stroke="stroke-brand-clarity"
-                fill="fill-brand-light"
-                size="size-[50px]"
-                badge={<KeenIcon icon="security-user" className="text-xl text-brand" />}
-              />
-
-              <div className="flex flex-col gap-1.5">
-                <div className="flex items-center flex-wrap gap-2.5">
-                  <a
-                    href="#"
-                    className="text-base font-medium text-gray-900 hover:text-primary-active"
-                  >
-                    User Access
-                  </a>
-                  <span className="badge badge-sm badge-outline shrink-0">16 days left</span>
-                </div>
-
-                <div className="form-info text-gray-800 font-normal">
-                  This API key can only access&nbsp;
-                  <a href="https://keenthemes.com/" className="link">
-                    @keenthemes
-                  </a>
-                  <br />
-                  Secure access with a unique API key for enhanced functionality.
-                </div>
+      <div className="card rounded-2xl shadow-sm overflow-hidden p-0 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow duration-300">
+        <div className="flex flex-col items-start gap-4 p-5 user-access-bg bg-no-repeat bg-[length:650px] bg-right">
+          <div className="flex items-center gap-4">
+            <div className="hexagon-container">
+              <div className="hexagon"></div>
+              <div className="hexagon-inner">
+                <span className="text-xl font-semibold text-blue-600 dark:text-blue-400">183</span>
               </div>
             </div>
-
-            <div className="flex items-center flex-wrap md:flex-nowrap gap-1.5">
-              <button className="btn btn-sm btn-dark shrink-0">Renew Plan</button>
-              <a href="#" className="btn btn-sm btn-clear btn-light">
-                Docs
-              </a>
+            <div className="flex flex-col">
+              <span className="text-sm font-semibold text-gray-900 dark:text-white">Pílulas Oris</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                Moeda de troca para ser utilizadas na Oris.{' '}
+                <a href="#" className="text-emerald-500 hover:underline">Sobre</a>
+              </span>
             </div>
           </div>
+        </div>
 
-          <p className="text-2sm text-gray-800">
-            Unlock the full potential of your application with our API, a secure gateway
-            facilitating seamless integration, empowering developers to create innovative and
-            dynamic experiences effortlessly.
-          </p>
+        {/* Botão aprimorado */}
+        <div className="w-full bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-700 dark:to-blue-600 px-4 py-3 flex justify-between items-center group hover:from-blue-500 hover:to-blue-400 dark:hover:from-blue-600 dark:hover:to-blue-500 transition-all duration-200 cursor-pointer">
+          <div className="flex items-center gap-2">
+            <KeenIcon icon="ki-solid ki-gift" className="text-white opacity-90 group-hover:opacity-100" />
+            <span className="text-white font-semibold text-sm">Pílula do Dia</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-emerald-300 font-medium text-sm">Disponível</span>
+            <KeenIcon icon="ki-solid ki-arrow-right" className="text-white text-opacity-70 group-hover:text-opacity-100 transition-all" />
+          </div>
         </div>
       </div>
     </Fragment>
