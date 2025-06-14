@@ -1,6 +1,5 @@
+import Integrations from "./blocks/Integrations";
 
-
-import { Integrations } from './blocks';
 
 const   AccountIntegrationsContent = () => {
   return (
