@@ -49,10 +49,10 @@ const Main = () => {
         <title>{menuItem?.title}</title>
       </Helmet>
 
-      {/* <Sidebar /> */}
 
         {/* <Header /> */}
       <div className=" pt-2 flex grow flex-col">
+      <Sidebar />
         
 
           <Outlet />
