@@ -1,7 +1,5 @@
-import {
-  CommunityBadges,
-  Contributions
-} from './blocks';
+import { toAbsoluteUrl } from '@/utils';
+import { CommunityBadges, Contributions } from './blocks';
 import { ExternalServicesManageApi } from '@/pages/account/home/settings-sidebar';
 
 const ProfileDefaultContent = () => {
@@ -11,11 +9,23 @@ const ProfileDefaultContent = () => {
   return (
     <div className="xl:grid-cols-3 gap-5 lg:gap-7.5">
       {/* Saudação do usuário */}
-    <div className="flex justify-center">
-        <div className="w-full max-w-3xl px-6"> {/* Added container with padding */}
+      {/* Logo */}
+      <div className="flex items-center flex  justify-center gap-2">
+        <img
+          src={toAbsoluteUrl('/public/media/images/Logo.png')}
+          alt="Logo Oris"
+          className="w-30 h-30 object-contain"
+        />
+      </div>
+      <div className="flex justify-center">
+        <div className="w-full max-w-3xl px-6">
+          {' '}
+          {/* Added container with padding */}
           <div className="flex items-center gap-4">
             {/* Greeting */}
-            <div className="flex flex-col py-4"> {/* Added vertical padding */}
+            <div className="flex flex-col py-4">
+              {' '}
+              {/* Added vertical padding */}
               <span className="text-xl font-bold text-blue-600">Olá, {userName}</span>
               <span className="text-sm text-gray-500">{userId}</span>
             </div>

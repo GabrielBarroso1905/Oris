@@ -51,8 +51,8 @@ const Main = () => {
 
       {/* <Sidebar /> */}
 
-      <div className="wrapper flex grow flex-col">
-        <Header />
+        {/* <Header /> */}
+      <div className=" pt-2 flex grow flex-col">
         
 
           <Outlet />
