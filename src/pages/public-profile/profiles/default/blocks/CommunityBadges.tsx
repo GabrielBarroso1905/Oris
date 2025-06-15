@@ -36,12 +36,12 @@ const CommunityBadges = ({ title }: ICommunityBadgesProps) => {
       updated: '2hrs'
     },
     {
-      title: "BPM",
+      title: "Ergonomia",
       stroke: 'stroke-danger',
       fill: 'fill-danger-light',
       icon: 'ki-filled ki-heart',
       iconColor: 'text-danger',
-      value: '95',
+      value: 'Bom',
       updated: '1hr'
     },
     {
