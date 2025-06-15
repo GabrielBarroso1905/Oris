@@ -13,7 +13,7 @@ export const ProfileDefaultContent: React.FC = () => {
       {/* Logo & Saudação */}
       <div className="flex flex-col items-center mt-8">
         <img
-          src={toAbsoluteUrl('/public/media/images/Logo.png')}
+          src={toAbsoluteUrl('/media/images/Logo.png')}
           alt="Logo Oris"
           className="w-24 h-24 object-contain mb-2"
         />

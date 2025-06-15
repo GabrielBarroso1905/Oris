@@ -44,7 +44,17 @@ export const MENU_SIDEBAR: TMenuConfig = [
             path: '/public-profile/profiles/nft',
             icon: 'profile'
             
-          },
+          },{
+            title: 'Settings - Modal',
+            path: '/network/user-table/team-crew',
+           icon: 'profile'
+           
+          },{
+            title: 'Settings - Modal',
+            path: '/public-profile/profiles/feeds',
+           icon: 'profile'
+           
+          }
         ]
       },
   //   children: [
@@ -137,6 +147,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
           {
             title: 'Settings - Modal',
             path: '/account/home/settings-modal'
+          },
+          {
+            title: 'Settings - Modal',
+            path: '/network/user-table/team-crew'
           }
         ]
       },
