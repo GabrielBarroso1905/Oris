@@ -92,7 +92,7 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/dark-sidebar" element={<Demo1DarkSidebarPage />} />
           <Route path="/" element={<ProfileDefaultPage />} />
           <Route path="/public-profile/profiles/creator" element={<ProfileCreatorPage />} />
-          <Route path="/public-profile/profiles/company" element={<ProfileCompanyPage />} />
+          <Route path="/public-profile/profiles/company" element={<ProfileFeedsPage />} />
           <Route path="/public-profile/profiles/nft" element={<ProfileNFTPage />} />
           <Route path="/public-profile/profiles/blogger" element={<ProfileBloggerPage />} />
           <Route path="/public-profile/profiles/crm" element={<ProfileCRMPage />} />

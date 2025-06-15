@@ -96,8 +96,8 @@ const AccountSettingsModal = ({ open, onOpenChange }: IModalProfileProps) => {
               <AdvancedSettingsNotifications />
 
               <AdvancedSettingsAddress />
-
-              <ExternalServicesManageApi title={''} switch={false} />
+{/* 
+              <ExternalServicesManageApi title={''} switch={false} /> */}
 
               <ExternalServicesIntegrations />
 

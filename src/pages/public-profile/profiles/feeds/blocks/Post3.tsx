@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
 import { Comments, Heading, Likes, Saves, Tabs } from '../post';
-import { ICommentsItems } from './Post1';
+// import { ICommentsItems } from './Post1';
 
 const Post3 = () => {
   const [activeTab, setActiveTab] = useState('likes');
 
-  const comments: ICommentsItems = [
+  const comments: any = [
     {
       avatar: '300-3.png',
       author: 'Mr. Anderson',
