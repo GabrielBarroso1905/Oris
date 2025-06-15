@@ -49,6 +49,11 @@ export const MENU_SIDEBAR: TMenuConfig = [
             path: '/network/user-table/team-crew',
            icon: 'profile'
            
+          },{
+            title: 'Settings - Modal',
+            path: '/public-profile/profiles/feeds',
+           icon: 'profile'
+           
           }
         ]
       },

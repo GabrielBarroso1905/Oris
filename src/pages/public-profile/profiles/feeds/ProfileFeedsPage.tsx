@@ -30,21 +30,12 @@ const ProfileFeedsPage = () => {
         ]}
       />
 
-      <Container>
-        <Navbar>
+      <Container className='flex justify-center'>
+      <Navbar>
           <PageMenu />
-
-          <NavbarActions>
-            <button type="button" className="btn btn-sm btn-primary">
-              <KeenIcon icon="users" /> Connect
-            </button>
-            <button className="btn btn-sm btn-icon btn-light">
-              <KeenIcon icon="messages" />
-            </button>
-            <NavbarDropdown />
-          </NavbarActions>
-        </Navbar>
+      </Navbar>
       </Container>
+      
 
       <Container>
         <ProfileFeedsContent />

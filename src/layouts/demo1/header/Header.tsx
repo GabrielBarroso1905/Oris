@@ -28,7 +28,7 @@ const Header = () => {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <img
-            src={toAbsoluteUrl('/public/media/images/Logo.png')}
+            src={toAbsoluteUrl('/media/images/Logo.png')}
             alt="Logo Oris"
             className="w-30 h-30 object-contain"
           />

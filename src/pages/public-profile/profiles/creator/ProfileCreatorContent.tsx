@@ -26,7 +26,7 @@ const ProfileCreatorContent = () => {
       <div className="flex justify-center">
         <div className="grid gap-5">
           <ExternalServicesManageApi title="Public API Key" switch={true} />
-          <HealthMissionsDashboard title="Community Badges" />
+          <HealthMissionsDashboard title="Outras Missões" />
           {/* <Contributions title="Investments" /> */}
         </div>
       </div>

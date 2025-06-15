@@ -1,5 +1,6 @@
 // src/pages/account/home/settings-sidebar.tsx
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { KeenIcon } from '@/components'
 import { toAbsoluteUrl } from '@/utils/Assets'
@@ -7,22 +8,32 @@ import { toAbsoluteUrl } from '@/utils/Assets'
 export interface IDoubleButtonAppProps {}
 
 /**
- * Dois cards quadrados, usando PNGs de hexágono no topo
- * (polygon1.png e polygon2.png em public/media/icons),
- * com status de disponibilidade e ícones sobrepostos.
+ * Dois cards quadrados lado a lado, usando SVGs de hexágono no topo,
+ * com status de disponibilidade e navegação programática via useNavigate.
  */
 export const DoubleButtonApp: React.FC<IDoubleButtonAppProps> = () => {
-  const pillAvailable = false  // simula se a pílula do dia está disponível
+  const navigate = useNavigate()
+  const pillAvailable = true  // simula disponibilidade da pílula do dia
+
+  const goToPill = () => {
+    if (pillAvailable) {
+      navigate('public-profile/profiles/creator')
+    }
+  }
+
+  const goToComplaint = () => {
+    navigate('/public-profile/profiles/company')
+  }
 
   return (
     <div className="grid grid-cols-2 gap-4 max-w-xs mx-auto">
       {/* Pílula do Dia */}
-      <a
-        href={pillAvailable ? "#" : undefined}
+      <div
+        onClick={goToPill}
         className={`
           aspect-square bg-white rounded-2xl shadow-sm flex flex-col overflow-hidden
           transform transition hover:scale-105
-          ${pillAvailable ? "" : "opacity-50 cursor-not-allowed"}
+          ${pillAvailable ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}
         `}
       >
         <div className="flex-1 flex flex-col items-center justify-center px-4">
@@ -36,9 +47,11 @@ export const DoubleButtonApp: React.FC<IDoubleButtonAppProps> = () => {
             <span
               className="absolute inset-0 flex items-center justify-center font-semibold"
               style={{
-                background: 'linear-gradient(to bottom, #3b82f6, #06b6d4)',
-                WebkitBackgroundClip: 'text',
-                color: 'transparent',
+                background: pillAvailable
+                  ? 'linear-gradient(to bottom, #3b82f6, #06b6d4)'
+                  : 'transparent',
+                WebkitBackgroundClip: pillAvailable ? 'text' : undefined,
+                color: pillAvailable ? 'transparent' : '#999',
               }}
             >
               183
@@ -59,12 +72,12 @@ export const DoubleButtonApp: React.FC<IDoubleButtonAppProps> = () => {
           </span>
           <ArrowRight size={16} />
         </div>
-      </a>
+      </div>
 
       {/* Denúncia Rápida */}
-      <a
-        href="http://localhost:5173/metronic/tailwind/react/public-profile/profiles/company"
-        className="aspect-square bg-white rounded-2xl shadow-sm flex flex-col overflow-hidden transform transition hover:scale-105"
+      <div
+        onClick={goToComplaint}
+        className="aspect-square bg-white rounded-2xl shadow-sm flex flex-col overflow-hidden transform transition hover:scale-105 cursor-pointer"
       >
         <div className="flex-1 flex flex-col items-center justify-center px-4">
           {/* Hexágono vermelho + ícone de alerta */}
@@ -85,7 +98,7 @@ export const DoubleButtonApp: React.FC<IDoubleButtonAppProps> = () => {
           <span className="font-medium">Fazer Denúncia</span>
           <ArrowRight size={16} />
         </div>
-      </a>
+      </div>
     </div>
   )
 }
