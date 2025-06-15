@@ -5,7 +5,7 @@ interface ICollaborateProps {
 }
 
 const Collaborate = ({ title }: ICollaborateProps) => {
-  return (
+  return (  
     <div className="card">
       <div className="card-header">
         <h3 className="card-title">{title}</h3>

@@ -4,12 +4,12 @@ interface IStatisticsItem {
   value: string;
   title: string;
 }
-interface IStatisticsItems extends Array<IStatisticsItem> {}
+type IStatisticsItems = Array<IStatisticsItem>;
 
 interface IStatisticsProps {
   data: IStatisticsItem[];
 }
-
+  
 const Statistics = ({ data }: IStatisticsProps) => {
   const renderData = (item: IStatisticsItem, index: number) => {
     return (

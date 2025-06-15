@@ -6,21 +6,21 @@ interface ITagsItem {
 interface ITagsItems extends Array<ITagsItem> {}
 
 interface ITagsProps {
-  title: string;
+  title: string;  
   className?: string;
+  items?: ITagsItems;  // Agora os tópicos podem vir de fora (do backend)
 }
 
-const Tags = ({ title, className }: ITagsProps) => {
-  const items: ITagsItems = [
-    { label: 'Web Design' },
-    { label: 'Code Review' },
-    { label: 'Figma' },
-    { label: 'Product Development' },
-    { label: 'Webflow' },
-    { label: 'AI' },
-    { label: 'noCode' },
-    { label: 'Management' }
-  ];
+const Tags = ({ title, className, items = [
+  { label: 'Estresse Ocupacional' },
+  { label: 'Fatores Psicossociais' },
+  { label: 'Carga de Trabalho' },
+  { label: 'Ambiente Organizacional' },
+  { label: 'Assédio Moral no Trabalho' },
+  { label: 'Demandas Emocionais' },
+  { label: 'Relações Interpessoais no Trabalho' },
+  { label: 'Prevenção ao Burnout' }
+] }: ITagsProps) => {
 
   const renderItem = (item: ITagsItem, index: number) => {
     return (

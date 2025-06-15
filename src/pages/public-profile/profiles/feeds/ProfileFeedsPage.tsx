@@ -21,14 +21,17 @@ const ProfileFeedsPage = () => {
   return (
     <Fragment>
       <UserProfileHero
-        name="Jenny Klabber"
-        image={image}
-        info={[
-          { label: 'KeenThemes', icon: 'abstract' },
-          { label: 'SF, Bay Area', icon: 'geolocation' },
-          { email: 'jenny@kteam.com', icon: 'sms' }
-        ]}
-      />
+          name="Dra. Helena Martins"
+          image={image}
+          info={[
+            { label: 'Psicóloga Clínica', icon: 'user' },
+            { label: 'Especialista em Saúde Mental no Trabalho', icon: 'award' },
+            { label: 'Mestrado em Psicologia Organizacional', icon: 'school' },
+            { label: 'São Paulo, SP', icon: 'geolocation' },
+            { label: 'helena.martins@gmail.com', icon: 'sms' }
+          ]}
+        />
+
 
       <Container className='flex justify-center'>
       <Navbar>

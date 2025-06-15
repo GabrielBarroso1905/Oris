@@ -8,17 +8,25 @@ interface ISummaryItems extends Array<ISummaryItem> {}
 
 interface ISummaryProps {
   title: string;
+  /**
+   * Breve resumo ou mensagem de acolhimento. Pode vir do backend.
+   * Opcional para manter compatibilidade com usos existentes.
+   */
+  description?: string;
 }
 
-const Summary = ({ title }: ISummaryProps) => {
+const Summary = ({
+  title,
+  description = 'Aqui você encontrará acolhimento, escuta e recursos para cuidar da sua saúde mental. Lembre-se: você não está sozinho nessa jornada.'
+}: ISummaryProps) => {
   const items: ISummaryItems = [
-    { icon: 'abstract-41', info: 'KeenThemes' },
-    { icon: 'crown-2', info: 'Author' },
-    { icon: 'briefcase', info: 'UI/UX Desiger' },
-    { icon: 'sms', info: 'enny@kteam.com' },
-    { icon: 'abstract-39', info: 'https://keenthemes.com' },
-    { icon: 'facebook', info: 'keenthemes' },
-    { icon: 'youtube', info: 'keenthemes' }
+    { icon: 'box', info: 'Práticas de Autocuidado' },
+    { icon: 'box', info: 'Técnicas de Respiração e Relaxamento' },
+    { icon: 'box', info: 'Rede de Apoio Emocional' },
+    { icon: 'box', info: 'Contato com Especialistas' },
+    { icon: 'box', info: 'Recursos Online de Saúde Mental' },
+    { icon: 'box', info: 'Comunidade de Apoio' },
+    { icon: 'box', info: 'Vídeos de Meditação Guiada' }
   ];
 
   const renderItem = (item: ISummaryItem, index: number) => {
@@ -39,10 +47,7 @@ const Summary = ({ title }: ISummaryProps) => {
       </div>
 
       <div className="card-body">
-        <p className="text-sm text-gray-800 leading-5.5 mb-4">
-          Experienced and creative professional with a passion great as for problem-solving and a
-          commitment to excellence.
-        </p>
+        <p className="text-sm text-gray-800 leading-5.5 mb-4">{description}</p>
 
         <div className="grid gap-y-3.5">
           {items.map((item, index) => {
