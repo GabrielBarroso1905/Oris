@@ -95,7 +95,7 @@ const AccountSettingsSidebarContent = () => {
 
         <AdvancedSettingsAddress />
 
-        <ExternalServicesManageApi title={''} switch={false} />
+        {/* <ExternalServicesManageApi title={''} switch={false} /> */}
 
         <ExternalServicesIntegrations />
 

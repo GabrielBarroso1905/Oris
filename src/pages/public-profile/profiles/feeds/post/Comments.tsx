@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { KeenIcon } from '@/components';
 import { toAbsoluteUrl } from '@/utils/Assets';
-import { ICommentsItem } from '../blocks';
+// import { ICommentsItem } from '../blocks';
 
 interface ICommentsProps {
-  items: ICommentsItem[];
+  items: any;
 }
 
 const Comments = ({ items }: ICommentsProps) => {
   const [commentInput, setCommentInput] = useState('');
 
-  const renderItem = (item: ICommentsItem, index: number) => {
+  const renderItem = (item: any, index: number) => {
     return (
       <div key={index} className="flex items-start gap-2.5">
         <img
@@ -43,9 +43,6 @@ const Comments = ({ items }: ICommentsProps) => {
 
   return (
     <div className="grid gap-2 lg:gap-5 p-7.5 pt-0">
-      {items.map((item, index) => {
-        return renderItem(item, index);
-      })}
 
       <div className="flex items-center gap-2.5">
         <img
