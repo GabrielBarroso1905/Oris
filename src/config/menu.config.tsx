@@ -24,37 +24,32 @@ export const MENU_SIDEBAR: TMenuConfig = [
         icon: 'profile-circle',
         children: [
           {
-            title: 'Default',
+            title: 'Principal',
             path: '/',
              icon: 'home',
           },
           {
-            title: 'Creator',
+            title: 'Missões',
             path: '/public-profile/profiles/creator',
             icon: 'flag'
           },
           {
-            title: 'Company',
+            title: 'Trilha',
             path: '/public-profile/profiles/company',
             icon: 'documents'
              
           },
           {
-            title: 'NFT',
+            title: 'Perfil',
             path: '/public-profile/profiles/nft',
             icon: 'profile'
             
           },{
-            title: 'Settings - Modal',
+            title: 'Admin',
             path: '/network/user-table/team-crew',
            icon: 'profile'
            
-          },{
-            title: 'Settings - Modal',
-            path: '/public-profile/profiles/feeds',
-           icon: 'profile'
-           
-          }
+          },
         ]
       },
   //   children: [
