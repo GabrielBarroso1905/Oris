@@ -26,7 +26,7 @@ const NetworkUserTableTeamCrewPage = () => {
       </Container>
       
 
-      <Container>
+      <Container className='max-w-[1800px]'>
         <NetworkUserTableTeamCrewContent />
       </Container>
     </Fragment>
