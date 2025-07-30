@@ -19,41 +19,44 @@ export const MENU_SIDEBAR: TMenuConfig = [
   //   heading: 'User'
   // },
 
-     {
-        title: 'Profiles',
-        icon: 'profile-circle',
-        children: [
-          {
-            title: 'Principal',
-            path: '/',
-             icon: 'home',
-          },
-          {
-            title: 'Missões',
-            path: '/public-profile/profiles/creator',
-            icon: 'flag'
-          },
-          {
-            title: 'Trilha',
-            path: '/public-profile/profiles/company',
-            icon: 'documents'
-             
-          },
-          {
-            title: 'Perfil',
-            path: '/public-profile/profiles/nft',
-            icon: 'profile'
-            
-          },{
-            title: 'Admin',
-            path: '/network/user-table/team-crew',
-           icon: 'profile'
-           
-          },
-        ]
+  {
+    title: 'Profiles',
+    icon: 'profile-circle',
+    children: [
+      {
+        title: 'Principal',
+        path: '/',
+        icon: 'home'
       },
+      {
+        title: 'Missões',
+        path: '/public-profile/profiles/creator',
+        icon: 'flag'
+      },
+      {
+        title: 'Trilha',
+        path: '/public-profile/profiles/company',
+        icon: 'documents'
+      },
+      {
+        title: 'Perfil',
+        path: '/public-profile/profiles/nft',
+        icon: 'profile'
+      },
+      {
+        title: 'Admin',
+        path: '/network/user-table/team-crew',
+        icon: 'flag'
+      },
+      // {
+      //   title: 'CRM',
+      //   path: '/public-profile/profiles/crm',
+      //    icon: 'profile',
+      // }
+    ]
+  },
   //   children: [
-     
+
   //     {
   //       title: 'Projects',
   //       children: [

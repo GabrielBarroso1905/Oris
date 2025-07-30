@@ -52,7 +52,7 @@ const Main = () => {
 
         {/* <Header /> */}
       <div className=" pt-2 flex grow flex-col">
-      <Sidebar />
+      {/* <Sidebar /> */}
         
 
           <Outlet />

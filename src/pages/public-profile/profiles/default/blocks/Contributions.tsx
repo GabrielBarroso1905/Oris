@@ -8,6 +8,10 @@ import { DropdownCard2 } from '@/partials/dropdowns/general'
 
 export interface IContributionsProps {
   title: string
+  sono?: string
+  humor?: string
+  ergonomia?: string
+  imc?: string
 }
 
 interface ICardData {
@@ -16,7 +20,7 @@ interface ICardData {
   iconColor: string
 }
 
-export const Contributions: React.FC<IContributionsProps> = ({ title }) => {
+export const Contributions: React.FC<IContributionsProps> = ({ title, sono, humor, ergonomia, imc }) => {
   const { isRTL } = useLanguage()
   const chartRef = useRef<any>(null)
   const [ready, setReady] = useState(false)
@@ -24,28 +28,70 @@ export const Contributions: React.FC<IContributionsProps> = ({ title }) => {
   const cardsData: ICardData[] = [
     { title: 'Sono', icon: 'ki-filled ki-moon', iconColor: 'text-primary' },
     { title: 'Humor', icon: 'ki-filled ki-emoji-happy', iconColor: 'text-success' },
-    { title: 'BPM', icon: 'ki-filled ki-heart', iconColor: 'text-danger' },
+    { title: 'Ergonomia', icon: 'ki-filled ki-heart', iconColor: 'text-danger' },
     { title: 'IMC', icon: 'ki-filled ki-user-tick', iconColor: 'text-info' }
   ]
 
-  const data = [10, 50, 60, 20]
-  const ranges = {
-    sleep: { min: 8, max: 12 },
-    mood: { min: 30, max: 50 },
-    bpm: { min: 60, max: 100 },
-    imc: { min: 18.5, max: 25 }
+  // Função para converter valores do formulário em números para o gráfico
+  const convertFormValueToNumber = (type: string, value: string | undefined): number => {
+    if (!value) return 0
+
+    const mappings: Record<string, Record<string, number>> = {
+      sono: {
+        'excelente': 10, // 8+ horas
+        'bom': 8,        // 6-8 horas
+        'regular': 6,    // 4-6 horas
+        'ruim': 4        // <4 horas
+      },
+      humor: {
+        'muito-feliz': 50, // Muito feliz
+        'feliz': 40,       // Feliz
+        'neutro': 30,      // Neutro
+        'triste': 20,      // Triste
+        'muito-triste': 10 // Muito triste
+      },
+      ergonomia: {
+        'excelente': 40, // Excelente
+        'boa': 30,       // Boa
+        'regular': 20,   // Regular
+        'ruim': 10       // Ruim
+      },
+      imc: {
+        // Para IMC, usar o valor numérico diretamente
+        default: parseFloat(value) || 0
+      }
+    }
+
+    return mappings[type]?.[value] || mappings[type]?.default || parseFloat(value) || 0
   }
+
+  // Calcular valores baseados nos dados do formulário
+  const data = [
+    convertFormValueToNumber('sono', sono),
+    convertFormValueToNumber('humor', humor),
+    convertFormValueToNumber('ergonomia', ergonomia),
+    convertFormValueToNumber('imc', imc)
+  ]
+
+  const ranges = {
+    sleep: { min: 6, max: 10 },    // Sono: 6-10 (bom a excelente)
+    mood: { min: 20, max: 50 },    // Humor: 20-50 (triste a muito feliz)
+    ergonomics: { min: 20, max: 40 }, // Ergonomia: 20-40 (regular a excelente)
+    imc: { min: 18.5, max: 25 }    // IMC: 18.5-25 (normal)
+  }
+  
   const unbalanced = [
     data[0] < ranges.sleep.min || data[0] > ranges.sleep.max,
     data[1] < ranges.mood.min || data[1] > ranges.mood.max,
-    data[2] < ranges.bpm.min || data[2] > ranges.bpm.max,
+    data[2] < ranges.ergonomics.min || data[2] > ranges.ergonomics.max,
     data[3] < ranges.imc.min || data[3] > ranges.imc.max
   ]
+  
   const msgs = [
-    'Ideal: 8–12h sono',
-    'Ideal: humor entre 30–50',
-    'Ideal: 60–100 BPM',
-    'Ideal: IMC entre 18.5–25'
+    'Ideal: 6-10h sono',
+    'Ideal: humor entre 20-50',
+    'Ideal: ergonomia entre 20-40',
+    'Ideal: IMC entre 18.5-25'
   ]
   const unCnt = unbalanced.filter(Boolean).length
   const balanced = unCnt === 0

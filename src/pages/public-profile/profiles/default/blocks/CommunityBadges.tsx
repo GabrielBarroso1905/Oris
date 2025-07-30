@@ -13,9 +13,46 @@ interface ICardData {
 
 interface ICommunityBadgesProps {
   title: string;
+  sono?: string;
+  humor?: string;
+  ergonomia?: string;
+  imc?: string;
 }
 
-const CommunityBadges = ({ title }: ICommunityBadgesProps) => {
+const CommunityBadges = ({ title, sono, humor, ergonomia, imc }: ICommunityBadgesProps) => {
+  // Função para mapear valores do formulário para textos amigáveis
+  const mapFormValueToDisplay = (type: string, value: string | undefined) => {
+    if (!value) return null
+    
+    const mappings: Record<string, Record<string, string>> = {
+      sono: {
+        'excelente': '8+ hrs',
+        'bom': '6-8 hrs', 
+        'regular': '4-6 hrs',
+        'ruim': '4 hrs'
+      },
+      humor: {
+        'muito-feliz': 'Excelente😊',
+        'feliz': 'Feliz🙂',
+        'neutro': 'Neutro😐',
+        'triste': 'Triste😔',
+        'muito-triste': 'Péssimo😢'
+      },
+      ergonomia: {
+        'excelente': 'Excelente',
+        'boa': 'Boa',
+        'regular': 'Regular',
+        'ruim': 'Ruim'
+      },
+      imc: {
+        // Para IMC, usar o valor direto se for um número
+        default: value
+      }
+    }
+    
+    return mappings[type]?.[value] || mappings[type]?.default || value
+  }
+
   const cardsData: ICardData[] = [
     {
       title: "Sono",
@@ -23,7 +60,7 @@ const CommunityBadges = ({ title }: ICommunityBadgesProps) => {
       fill: 'fill-primary-light',
       icon: 'ki-filled ki-moon',
       iconColor: 'text-primary',
-      value: '8 hrs',
+      value: mapFormValueToDisplay('sono', sono) || '8 hrs',
       updated: '3hrs'
     },
     {
@@ -32,7 +69,7 @@ const CommunityBadges = ({ title }: ICommunityBadgesProps) => {
       fill: 'fill-success-light',
       icon: 'ki-filled ki-emoji-happy',
       iconColor: 'text-success',
-      value: 'Contente',
+      value: mapFormValueToDisplay('humor', humor) || 'Contente',
       updated: '2hrs'
     },
     {
@@ -41,7 +78,7 @@ const CommunityBadges = ({ title }: ICommunityBadgesProps) => {
       fill: 'fill-danger-light',
       icon: 'ki-filled ki-heart',
       iconColor: 'text-danger',
-      value: 'Bom',
+      value: mapFormValueToDisplay('ergonomia', ergonomia) || 'Bom',
       updated: '1hr'
     },
     {
@@ -50,7 +87,7 @@ const CommunityBadges = ({ title }: ICommunityBadgesProps) => {
       fill: 'fill-info-light',
       icon: 'ki-filled ki-user-tick',
       iconColor: 'text-info',
-      value: '24',
+      value: mapFormValueToDisplay('imc', imc) || '24',
       updated: '30min'
     }
   ];

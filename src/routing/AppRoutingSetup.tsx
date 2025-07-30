@@ -86,7 +86,7 @@ import {
 const AppRoutingSetup = (): ReactElement => {
   return (
     <Routes>
-      <Route element={<RequireAuth />}>
+      {/* <Route element={<RequireAuth />}> */}
         <Route element={<Demo1Layout />}>
           {/* <Route path="/" element={<DefaultPage />} /> */}
           <Route path="/dark-sidebar" element={<Demo1DarkSidebarPage />} />
@@ -185,7 +185,7 @@ const AppRoutingSetup = (): ReactElement => {
             element={<AuthenticationAccountDeactivatedPage />}
           />
           <Route path="/authentication/get-started" element={<AuthenticationGetStartedPage />} />
-        </Route>
+        {/* </Route> */}
       </Route>
       <Route path="error/*" element={<ErrorsRouting />} />
       <Route path="auth/*" element={<AuthPage />} />
