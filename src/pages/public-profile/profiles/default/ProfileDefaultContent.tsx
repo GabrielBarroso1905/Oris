@@ -38,7 +38,7 @@ export const ProfileDefaultContent: React.FC = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white pb-12 flex flex-col items-center">
+    <div className="min-h-screen bg-white pb-12 fl  ex flex-col items-center">
       {/* Logo & Saudação */}
       <div className="flex flex-col items-center mt-8">
         <img

@@ -18,6 +18,10 @@ interface IExternalServicesManageApiProps {
   missionType: MissionType; // Prop para indicar o tipo de interação (vídeo, quiz, hábito)
   quizQuestions?: { question: string; options: string[]; correctAnswer: string }[]; // Para a missão de quiz
   habitTask?: string; // Para a missão de hábito
+  // NOVA PROP: Para receber o total de pílulas acumuladas
+  overallTotalPills: number;
+  // NOVA PROP: Callback para notificar o componente pai sobre os pontos ganhos nesta missão diária
+  onPointsEarned: (points: number) => void;
 }
 
 const pillAvailable = true; // Mantido, se "pílulas" for a moeda de gamificação
@@ -32,11 +36,14 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
   missionType,
   quizQuestions,
   habitTask,
+  overallTotalPills, // Recebe o total acumulado
+  onPointsEarned, // Recebe o callback para enviar os pontos desta missão
 }) => {
   const playerRef = useRef<ReactPlayer>(null);
   const [isMissionModalOpen, setIsMissionModalOpen] = useState(false);
   const [hasCompletedMission, setHasCompletedMission] = useState(false);
-  const [dailyScore, setDailyScore] = useState<number | null>(null);
+  // RENOMEADO: Agora armazena a pontuação SOMENTE desta missão diária
+  const [currentDailyMissionScore, setCurrentDailyMissionScore] = useState<number | null>(null);
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
   // Estados específicos para a missão de vídeo
   const [watchProgress, setWatchProgress] = useState(0);
@@ -101,7 +108,10 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
   // Lógica para coletar pontos (comum a todas as missões)
   const collectScore = () => {
     const score = Math.floor(Math.random() * 91) + 10; // Pontuação de 10 a 100
-    setDailyScore(score);
+    setCurrentDailyMissionScore(score); // Armazena a pontuação desta missão
+
+    // CHAMA O CALLBACK PARA O COMPONENTE PAI, ADICIONANDO ESTA PONTUAÇÃO AO TOTAL
+    onPointsEarned(score);
 
     // TODO: Implementar salvamento real em localStorage ou API
     const savedData = {
@@ -116,9 +126,10 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
   };
 
   const handleButtonClick = () => {
-    if (!hasCompletedMission && dailyScore === null) {
+    // A lógica para "Coletar Pílulas" agora depende de `currentDailyMissionScore`
+    if (!hasCompletedMission && currentDailyMissionScore === null) {
       openMissionModal();
-    } else if (hasCompletedMission && dailyScore === null) {
+    } else if (hasCompletedMission && currentDailyMissionScore === null) {
       collectScore();
     }
   };
@@ -127,27 +138,29 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
   useEffect(() => {
     const today = new Date().toDateString();
     // Simular carregamento de dados salvos para a missão do dia
-    // const savedData = localStorage.getItem(`dailyMission_${missionType}_${theme}`); // Se você salvar por tema e tipo
+    // Se você salvar por tema e tipo, precisaria ajustar aqui
+    // const savedData = localStorage.getItem(`dailyMission_${missionType}_${theme}`);
     // if (savedData) {
-    //   const data = JSON.parse(savedData);
-    //   if (data.date === today && data.missionType === missionType) { // && data.theme === theme
-    //     setDailyScore(data.score);
-    //     setHasCompletedMission(data.missionCompleted);
-    //   }
+    //   const data = JSON.parse(savedData);
+    //   if (data.date === today && data.missionType === missionType) {
+    //     setCurrentDailyMissionScore(data.score); // Carrega a pontuação específica desta missão
+    //     setHasCompletedMission(data.missionCompleted);
+    //   }
     // }
   }, [missionType]); // Depende do tipo de missão para carregar o estado correto
 
+  // Estas funções agora usam `currentDailyMissionScore` para avaliar o desempenho DESTA missão
   const getScoreColor = () => {
-    if (!dailyScore) return '#999';
-    if (dailyScore >= 80) return '#10b981'; // green
-    if (dailyScore >= 60) return '#f59e0b'; // yellow
+    if (!currentDailyMissionScore) return '#999';
+    if (currentDailyMissionScore >= 80) return '#10b981'; // green
+    if (currentDailyMissionScore >= 60) return '#f59e0b'; // yellow
     return '#ef4444'; // red
   };
 
   const getScoreLabel = () => {
-    if (!dailyScore) return 'Pendente';
-    if (dailyScore >= 80) return 'Excelente!';
-    if (dailyScore >= 60) return 'Bom!';
+    if (!currentDailyMissionScore) return 'Pendente';
+    if (currentDailyMissionScore >= 80) return 'Excelente!';
+    if (currentDailyMissionScore >= 60) return 'Bom!';
     return 'Pode melhorar';
   };
 
@@ -160,7 +173,7 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
     } else if (title.startsWith("Pílulas Oris: Quiz - ")) {
       displayTitle = title.replace("Pílulas Oris: Quiz - ", "");
     } else if (title.startsWith("Pílulas Oris: Registre sua Rotina de ")) {
-        displayTitle = title.replace("Pílulas Oris: Registre sua Rotina de ", "Sua Rotina de "); // Pequeno ajuste para o hábito
+      displayTitle = title.replace("Pílulas Oris: Registre sua Rotina de ", "Sua Rotina de "); // Pequeno ajuste para o hábito
     }
 
 
@@ -206,9 +219,9 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
               </div>
             </div>
             <button
-              disabled={!hasCompletedMission || dailyScore !== null}
+              disabled={!hasCompletedMission || currentDailyMissionScore !== null}
               onClick={handleButtonClick}
-              className={`w-full px-4 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2 mt-6 ${hasCompletedMission && dailyScore === null
+              className={`w-full px-4 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2 mt-6 ${hasCompletedMission && currentDailyMissionScore === null
                 ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700'
                 : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 }`}
@@ -264,9 +277,9 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
               <p className="text-red-500">Nenhuma pergunta de quiz disponível.</p>
             )}
             <button
-              disabled={!hasCompletedMission || dailyScore !== null}
+              disabled={!hasCompletedMission || currentDailyMissionScore !== null}
               onClick={handleButtonClick}
-              className={`w-full px-4 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2 mt-6 ${hasCompletedMission && dailyScore === null
+              className={`w-full px-4 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2 mt-6 ${hasCompletedMission && currentDailyMissionScore === null
                 ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700'
                 : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 }`}
@@ -289,7 +302,7 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
               </p>
               <button
                 onClick={handleLogHabit}
-                disabled={habitLogged || dailyScore !== null}
+                disabled={habitLogged || currentDailyMissionScore !== null}
                 className={`px-6 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2 mx-auto ${habitLogged
                   ? 'bg-green-100 text-green-700 cursor-default'
                   : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700'
@@ -305,9 +318,9 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
               )}
             </div>
             <button
-              disabled={!hasCompletedMission || dailyScore !== null}
+              disabled={!hasCompletedMission || currentDailyMissionScore !== null}
               onClick={handleButtonClick}
-              className={`w-full px-4 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2 mt-6 ${hasCompletedMission && dailyScore === null
+              className={`w-full px-4 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2 mt-6 ${hasCompletedMission && currentDailyMissionScore === null
                 ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700'
                 : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 }`}
@@ -405,20 +418,21 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
                 <div
                   className="absolute inset-0 flex items-center justify-center"
                   style={{
-                    background: pillAvailable && dailyScore
+                    background: pillAvailable && currentDailyMissionScore // Use currentDailyMissionScore for visual feedback of *this* mission
                       ? `linear-gradient(135deg, ${getScoreColor()}, ${getScoreColor()}99)`
                       : 'transparent',
-                    WebkitBackgroundClip: pillAvailable && dailyScore ? 'text' : undefined,
-                    color: pillAvailable && dailyScore ? 'transparent' : '#999',
+                    WebkitBackgroundClip: pillAvailable && currentDailyMissionScore ? 'text' : undefined,
+                    color: pillAvailable && currentDailyMissionScore ? 'transparent' : '#999',
                   }}
                 >
+                  {/* MODIFICADO: Agora exibe o total acumulado de pílulas */}
                   <span className="text-lg font-bold">
-                    {dailyScore || '0'}
+                    {overallTotalPills || '0'}
                   </span>
                 </div>
               </div>
 
-              {dailyScore && (
+              {currentDailyMissionScore && ( // Use currentDailyMissionScore to show completion for *this* mission
                 <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                   <KeenIcon icon="ki-solid ki-check" className="text-white text-xs" />
                 </div>
@@ -430,7 +444,7 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
                 <h3 className="font-bold text-gray-900 dark:text-white">
                   {title}
                 </h3>
-                {dailyScore && (
+                {currentDailyMissionScore && ( // Use currentDailyMissionScore for the label
                   <span className={`text-xs px-2 py-1 rounded-full text-white`}
                     style={{ backgroundColor: getScoreColor() }}>
                     {getScoreLabel()}
@@ -448,9 +462,9 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
                 </button>
               </p>
 
-              {dailyScore && (
+              {currentDailyMissionScore && ( // Use currentDailyMissionScore for the text
                 <div className="text-xs text-gray-500">
-                  Missão concluída hoje • {dailyScore} pílulas coletadas
+                  Missão concluída hoje • {currentDailyMissionScore} pílulas coletadas
                 </div>
               )}
             </div>
@@ -458,23 +472,23 @@ const ExternalServicesManageApi: React.FC<IExternalServicesManageApiProps> = ({
         </div>
 
         <button
-          disabled={!showSwitch || dailyScore !== null}
+          disabled={!showSwitch || currentDailyMissionScore !== null} // Use currentDailyMissionScore
           onClick={handleButtonClick}
           className={`w-full flex items-center justify-center gap-2 px-4 py-4 transition-all duration-200 font-medium ${!showSwitch
             ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-            : dailyScore !== null
+            : currentDailyMissionScore !== null // Use currentDailyMissionScore
               ? 'bg-green-100 text-green-700 cursor-default'
               : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
             }`}
         >
           <KeenIcon
-            icon={dailyScore ? "ki-solid ki-check" : "ki-solid ki-capsule"}
-            className={dailyScore ? "text-green-600" : "text-current"}
+            icon={currentDailyMissionScore ? "ki-solid ki-check" : "ki-solid ki-capsule"} // Use currentDailyMissionScore
+            className={currentDailyMissionScore ? "text-green-600" : "text-current"} // Use currentDailyMissionScore
           />
           <span>
             {!showSwitch
               ? 'Indisponível'
-              : dailyScore !== null
+              : currentDailyMissionScore !== null // Use currentDailyMissionScore
                 ? 'Missão Concluída'
                 : 'Fazer Missão do Dia'}
           </span>
