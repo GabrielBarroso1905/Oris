@@ -42,7 +42,6 @@ export const ProfileDefaultContent: React.FC = () => {
       {/* Logo & Saudação */}
       <div className="flex flex-col items-center pt-8">
         <div className="relative inline-block mb-6">
-          
           <img
             src={toAbsoluteUrl('/media/images/Logo.png')}
             alt="Logo Oris"
