@@ -244,51 +244,147 @@ export const DoubleButtonApp: React.FC<IDoubleButtonAppProps> = () => {
   return (
     <>
       <div className="grid grid-cols-1 gap-4 max-w-xs mx-auto">
-        {/* Pílula do Dia */}
+        {/* Pílula do Dia - Tema Saúde/Médico */}
         <div
           onClick={goToPill}
           className={`
-            aspect-square bg-white rounded-2xl shadow-sm flex flex-col overflow-hidden
-            transform transition hover:scale-105
-            ${pillAvailable ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}
+            group relative aspect-square bg-gradient-to-br from-blue-50 via-white to-green-50 
+            rounded-3xl flex flex-col overflow-hidden border-2
+            transition-all duration-400 hover:scale-[1.02] hover:-translate-y-1
+            ${pillAvailable 
+              ? 'cursor-pointer border-blue-200 shadow-lg hover:shadow-2xl hover:shadow-blue-200/30' 
+              : 'opacity-60 cursor-not-allowed border-gray-200 shadow-md'}
           `}
         >
-          <div className="flex-1 flex flex-col items-center justify-center px-4">
-            {/* Hexágono + contador em degradê azul→verde */}
-            <div className="relative w-16 h-16 mb-2">
+          {/* Medical cross pattern subtle background */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-4 left-4 w-6 h-2 bg-blue-400 rounded-full"></div>
+            <div className="absolute top-3 left-5 w-2 h-6 bg-blue-400 rounded-full"></div>
+            <div className="absolute bottom-6 right-4 w-6 h-2 bg-green-400 rounded-full"></div>
+            <div className="absolute bottom-5 right-5 w-2 h-6 bg-green-400 rounded-full"></div>
+          </div>
+
+          {/* Header com indicador de saúde */}
+          <div className="flex items-center justify-between p-3">
+            <div className={`flex items-center gap-2 ${pillAvailable ? 'text-green-600' : 'text-gray-400'}`}>
+              <div className={`w-2 h-2 rounded-full ${pillAvailable ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+              <span className="text-xs font-medium uppercase tracking-wide">
+                {pillAvailable ? 'Disponível' : 'Indisponível'}
+              </span>
+            </div>
+            <div className="text-xs text-gray-500 font-mono">#{pillAvailable ? '183' : '000'}</div>
+          </div>
+
+          <div className="relative flex-1 flex flex-col items-center justify-center px-6 py-4">
+            {/* Container do hexágono com efeito médico */}
+            <div className="relative w-24 h-24 mb-4 group-hover:scale-105 transition-all duration-400">
+              {/* Círculos concêntricos como batimento cardíaco */}
+              <div className={`absolute inset-0 rounded-full border-2 border-dashed transition-all duration-1000 ${
+                pillAvailable ? 'border-blue-300 animate-spin opacity-30' : 'border-gray-300 opacity-20'
+              }`} style={{ animationDuration: '8s' }}></div>
+              
+              <div className={`absolute inset-2 rounded-full border transition-all duration-700 ${
+                pillAvailable ? 'border-green-300 animate-pulse' : 'border-gray-300'
+              }`}></div>
+              
               <img
                 src={toAbsoluteUrl('/media/icons/polygon1.svg')}
                 alt="Hexágono Pílulas Oris"
-                className="w-full h-full"
+                className={`relative w-full h-full transition-all duration-400 ${
+                  pillAvailable ? 'filter drop-shadow-lg' : 'filter grayscale opacity-70'
+                }`}
               />
-              <span
-                className="absolute inset-0 flex items-center justify-center font-semibold"
-                style={{
-                  background: pillAvailable
-                    ? 'linear-gradient(to bottom, #3b82f6, #06b6d4)'
-                    : 'transparent',
-                  WebkitBackgroundClip: pillAvailable ? 'text' : undefined,
-                  color: pillAvailable ? 'transparent' : '#999',
-                }}
-              >
-                183
-              </span>
+              
+              {/* Contador com estilo clínico */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span
+                  className={`
+                    text-2xl font-bold transition-all duration-400
+                    ${pillAvailable 
+                      ? 'text-blue-700 drop-shadow-sm' 
+                      : 'text-gray-400'
+                    }
+                  `}
+                >
+                  183
+                </span>
+              </div>
+
+              {/* Indicadores de vitalidade */}
+              {pillAvailable && (
+                <div className="absolute -top-1 -right-1">
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-ping opacity-60"></div>
+                  <div className="absolute inset-0 w-3 h-3 bg-green-500 rounded-full opacity-80"></div>
+                </div>
+              )}
             </div>
-            <span className="text-sm font-semibold text-gray-900">Pílulas Oris</span>
+            
+            <div className="text-center space-y-2">
+              <span className={`
+                text-sm font-semibold transition-colors duration-300
+                ${pillAvailable ? 'text-gray-800' : 'text-gray-500'}
+              `}>
+                Pílulas Oris
+              </span>
+              
+              {/* Informação adicional de saúde */}
+              <div className={`text-xs transition-colors duration-300 ${
+                pillAvailable ? 'text-blue-600' : 'text-gray-400'
+              }`}>
+                <div className="flex items-center justify-center gap-1">
+                  <span>Suplemento Diário</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div
-            className={`
-              flex items-center justify-center gap-2 py-2
-              ${pillAvailable
-                ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                : 'bg-gray-300 text-gray-600'}
-            `}
-          >
-            <span className="font-medium">
-              {pillAvailable ? 'Pílula do Dia' : 'Indisponível'}
-            </span>
-            <ArrowRight size={16} />
+          
+          {/* Botão estilo receita médica */}
+          <div className="relative">
+            <div
+              className={`
+                flex items-center justify-center gap-3 py-4 px-6 relative
+                transition-all duration-300 font-medium text-sm
+                ${pillAvailable
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg' 
+                  : 'bg-gradient-to-r from-gray-400 to-gray-500 text-white'}
+              `}
+            >
+              {/* Padrão sutil de cruz médica */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="flex items-center justify-center h-full">
+                  <div className="w-4 h-1 bg-white rounded-full"></div>
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-1 h-4 bg-white rounded-full"></div>
+                </div>
+              </div>
+          
+              
+              <span className={`transition-all duration-300 ${
+                pillAvailable ? 'group-hover:tracking-wide' : ''
+              }`}>
+                {pillAvailable ? 'Tomar Agora' : 'Indisponível'}
+              </span>
+              
+              <ArrowRight 
+                size={18} 
+                className={`
+                  transition-all duration-300
+                  ${pillAvailable ? 'group-hover:translate-x-1' : ''}
+                `} 
+              />
+            </div>
+
+            {/* Linha de vida/ECG sutil */}
+            {pillAvailable && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
+            )}
           </div>
+
+          {/* Overlay de brilho saudável */}
+          <div className={`absolute inset-0 bg-gradient-to-tr from-blue-500/5 via-transparent to-green-500/5 pointer-events-none transition-opacity duration-500 ${
+            pillAvailable ? 'group-hover:from-blue-500/10 group-hover:to-green-500/10' : ''
+          }`}></div>
         </div>
       </div>
 
