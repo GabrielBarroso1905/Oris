@@ -38,16 +38,22 @@ export const ProfileDefaultContent: React.FC = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white pb-12 fl  ex flex-col items-center">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40">
       {/* Logo & Saudação */}
-      <div className="flex flex-col items-center mt-8">
-        <img
-          src={toAbsoluteUrl('/media/images/Logo.png')}
-          alt="Logo Oris"
-          className="w-24 h-24 object-contain mb-2"
-        />
-        <h2 className="text-2xl font-bold text-blue-600">Olá, {userName}</h2>
-        <p className="text-sm text-gray-500">{userId}</p>
+      <div className="flex flex-col items-center pt-8">
+        <div className="relative inline-block mb-6">
+          
+          <img
+            src={toAbsoluteUrl('/media/images/Logo.png')}
+            alt="Logo Oris"
+          />
+        </div>
+        <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-600 bg-clip-text text-transparent">
+          Olá, {userName}
+        </h2>
+        <div className="inline-flex items-center px-3 py-1 mt-2 rounded-full bg-blue-100/80 border border-blue-200/50">
+          <span className="text-sm font-medium text-blue-700">{userId}</span>
+        </div>
       </div>
 
       {/* BOTÕES QUADRADOS EM 2 COLUNAS NO MOBILE */}
